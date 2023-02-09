@@ -1,0 +1,6 @@
+.vscode
+.tox
+.pytest_cache
+.coverage
+books.db
+

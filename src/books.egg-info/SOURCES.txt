@@ -1,0 +1,8 @@
+setup.py
+src/__init__.py
+src/books.py
+src/books.egg-info/PKG-INFO
+src/books.egg-info/SOURCES.txt
+src/books.egg-info/dependency_links.txt
+src/books.egg-info/requires.txt
+src/books.egg-info/top_level.txt
