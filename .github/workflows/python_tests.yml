@@ -1,26 +1,37 @@
+# Testsという名前のワークフロー
 name: Tests
 
+# プッシュまたはプルリクエスト時に実行
 on:
   - push
   - pull_request
 
+# テストジョブの定義
 jobs:
   test:
+    # 実行するOSを指定 (ubuntu-latestとwindows-latest)
     runs-on: ${{ matrix.os }}
+    # pythonバージョンによって異なるOS環境を用意
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
         python-version: ["3.7", "3.8", "3.9", "3.10"]
 
+    # 実行するステップ
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install tox tox-gh-actions
-    - name: Test with tox
-      run: tox
+      # Githubリポジトリをチェックアウト
+      - name: Checkout Github repository
+        uses: actions/checkout@v2
+      # Pythonを指定バージョンにセットアップ
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      # 依存関係のインストール
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install tox tox-gh-actions
+      # Toxを使ってテストを実行
+      - name: Test with tox
+        run: tox
